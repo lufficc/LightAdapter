@@ -5,18 +5,15 @@ package com.lufficc.lightadapter;
  */
 
 class CheckUtil {
-    static void checkInRange(int size, int position) {
-        if (position < 0 || position >= size)
-            throw new IllegalArgumentException("position is out of range :" + position + "/" + size);
+    static boolean checkInRange(int size, int position) {
+        return  (position >= 0 && position < size);
     }
 
-    static void checkExits(int position) {
-        if (position == -1)
-            throw new IllegalArgumentException("the object you are removing doesn't exits");
+    static boolean checkExits(int position) {
+        return  (position != -1);
     }
 
-    static void haveYouRegister(int type) {
-        if (type == -1)
-            throw new IllegalArgumentException("can not found a viewHolder provider,have you registered the model class??");
+    static boolean haveYouRegister(int type) {
+        return (type == -1);
     }
 }

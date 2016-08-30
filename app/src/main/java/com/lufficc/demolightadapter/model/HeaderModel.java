@@ -5,4 +5,5 @@ package com.lufficc.demolightadapter.model;
  */
 
 public class HeaderModel {
+
 }

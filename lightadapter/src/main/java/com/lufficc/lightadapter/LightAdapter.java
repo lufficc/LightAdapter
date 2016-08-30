@@ -3,6 +3,7 @@ package com.lufficc.lightadapter;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -22,6 +23,25 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private List<? super Object> footers = new ArrayList<>();
 
     private LayoutInflater layoutInflater;
+
+    private OnDataClickListener onDataClickListener;
+
+    private OnHeaderClickListener onHeaderClickListener;
+
+    private OnFooterClickListener onFooterClickListener;
+
+    public void setOnFooterClickListener(OnFooterClickListener onFooterClickListener) {
+        this.onFooterClickListener = onFooterClickListener;
+    }
+
+    public void setOnHeaderClickListener(OnHeaderClickListener onHeaderClickListener) {
+        this.onHeaderClickListener = onHeaderClickListener;
+    }
+
+    public void setOnDataClickListener(OnDataClickListener onDataClickListener) {
+        this.onDataClickListener = onDataClickListener;
+    }
+
 
     public <Model, VH extends RecyclerView.ViewHolder> void register(@NonNull Class<Model> model, @NonNull ViewHolderProvider<Model, VH> viewHolderProvider) {
         synchronized (this) {
@@ -80,14 +100,42 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     @SuppressWarnings("unchecked")
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         int type = getItemViewType(position);
-        if (positionInHeaders(position))
-            viewHolderProviders.get(type).onBindViewHolder(headers.get(position), holder);
-        else if (positionInFooters(position))
-            viewHolderProviders.get(type).onBindViewHolder(footers.get(position2Footer(position)), holder);
-        else
-            viewHolderProviders.get(type).onBindViewHolder(data.get(position2Data(position)), holder);
+        if (positionInHeaders(position)) {
+            final Object header = headers.get(position);
+            viewHolderProviders.get(type).onBindViewHolder(header, holder);
+            if (onHeaderClickListener != null) {
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onHeaderClickListener.onHeaderClick(holder.getAdapterPosition(), header);
+                    }
+                });
+            }
+        } else if (positionInFooters(position)) {
+            final Object footer = footers.get(position2Footer(position));
+            viewHolderProviders.get(type).onBindViewHolder(footer, holder);
+            if (onFooterClickListener != null) {
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onFooterClickListener.onFooterClick(holder.getAdapterPosition(), footer);
+                    }
+                });
+            }
+        } else {
+            final Object data = this.data.get(position2Data(position));
+            viewHolderProviders.get(type).onBindViewHolder(data, holder);
+            if (onDataClickListener != null) {
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onDataClickListener.onDataClick(position2Data(holder.getAdapterPosition()), data);
+                    }
+                });
+            }
+        }
     }
 
     @Override
@@ -144,42 +192,49 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     public void removeHeader(int position) {
-        CheckUtil.checkInRange(headers.size(), position);
-        headers.remove(position);
-        notifyItemRemoved(position);
+        if (CheckUtil.checkInRange(headers.size(), position)) {
+            headers.remove(position);
+            notifyItemRemoved(position);
+        }
+
     }
 
     public void removeData(int position) {
-        CheckUtil.checkInRange(data.size(), position);
-        data.remove(position);
-        notifyItemRemoved(position + headers.size());
+        if (CheckUtil.checkInRange(data.size(), position)) {
+            data.remove(position);
+            notifyItemRemoved(position + headers.size());
+        }
     }
 
     public void removeFooter(int position) {
-        CheckUtil.checkInRange(footers.size(), position);
-        footers.remove(position);
-        notifyItemRemoved(position + headers.size() + data.size());
+        if (CheckUtil.checkInRange(footers.size(), position)) {
+            footers.remove(position);
+            notifyItemRemoved(position + headers.size() + data.size());
+        }
     }
 
     public void removeHeader(Object header) {
         int index = headers.indexOf(header);
-        CheckUtil.checkExits(index);
-        headers.remove(header);
-        notifyItemRemoved(index);
+        if (CheckUtil.checkExits(index)) {
+            headers.remove(header);
+            notifyItemRemoved(index);
+        }
     }
 
     public void removeData(Object removingData) {
         int index = data.indexOf(removingData);
-        CheckUtil.checkExits(index);
-        data.remove(removingData);
-        notifyItemRemoved(index + headers.size());
+        if (CheckUtil.checkExits(index)) {
+            data.remove(removingData);
+            notifyItemRemoved(index + headers.size());
+        }
     }
 
     public void removeFooter(Object footer) {
         int index = footers.indexOf(footer);
-        CheckUtil.checkExits(index);
-        footers.remove(footer);
-        notifyItemRemoved(index + data.size() + headers.size());
+        if (CheckUtil.checkExits(index)) {
+            footers.remove(footer);
+            notifyItemRemoved(index + data.size() + headers.size());
+        }
     }
 
     public void clearHeaders() {
