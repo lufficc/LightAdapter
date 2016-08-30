@@ -7,13 +7,14 @@ import android.support.annotation.DrawableRes;
  */
 
 public class ImgModel {
-    public ImgModel(@DrawableRes int imgId) {
-        this.imgId = imgId;
-    }
 
     @DrawableRes
     public int getImgId() {
         return imgId;
+    }
+
+    public ImgModel(int imgId) {
+        this.imgId = imgId;
     }
 
     public void setImgId(@DrawableRes int imgId) {

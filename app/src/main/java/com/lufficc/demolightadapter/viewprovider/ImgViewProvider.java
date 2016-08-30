@@ -28,21 +28,15 @@ public class ImgViewProvider extends ViewHolderProvider<ImgModel, ImgViewProvide
 
     @Override
     public void onBindViewHolder(ImgModel imgModel, ImgViewHolder viewHolder) {
-        viewHolder.setRandomImg();
+        viewHolder.imageView.setImageResource(imgModel.getImgId());
     }
 
     class ImgViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        int[] images = new int[]{R.mipmap.ic_launcher};
-
-
         ImgViewHolder(View itemView) {
             super(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.img);
         }
 
-        void setRandomImg() {
-            imageView.setImageResource(images[random.nextInt(images.length)]);
-        }
     }
 }

@@ -60,11 +60,15 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemViewType(int position) {
+        int type = -1;
         if (positionInHeaders(position))
-            return models.indexOf(headers.get(position).getClass());
+            type = models.indexOf(headers.get(position).getClass());
         else if (positionInFooters(position))
-            return models.indexOf(footers.get(position2Footer(position)).getClass());
-        return models.indexOf(data.get(position2Data(position)).getClass());
+            type = models.indexOf(footers.get(position2Footer(position)).getClass());
+        else
+            type = models.indexOf(data.get(position2Data(position)).getClass());
+        CheckUtil.haveYouRegister(type);
+        return type;
     }
 
     @Override

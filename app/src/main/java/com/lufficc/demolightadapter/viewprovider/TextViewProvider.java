@@ -1,6 +1,5 @@
 package com.lufficc.demolightadapter.viewprovider;
 
-import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,10 +23,9 @@ public class TextViewProvider extends ViewHolderProvider<TextModel, TextViewProv
         return new TextViewHolder(layoutInflater.inflate(R.layout.item_text, parent, false));
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(TextModel textModel, TextViewHolder viewHolder) {
-        viewHolder.textView.setText("I am text " + position++);
+        viewHolder.textView.setText(textModel.getText());
     }
 
     class TextViewHolder extends RecyclerView.ViewHolder {

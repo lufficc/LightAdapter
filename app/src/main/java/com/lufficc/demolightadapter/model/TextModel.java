@@ -9,13 +9,13 @@ public class TextModel {
         return text;
     }
 
+    public TextModel(String text) {
+        this.text = text;
+    }
+
     public void setText(String text) {
         this.text = text;
     }
 
     private String text;
-
-    public TextModel(String text) {
-        this.text = text;
-    }
 }

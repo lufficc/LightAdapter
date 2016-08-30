@@ -14,4 +14,9 @@ class CheckUtil {
         if (position == -1)
             throw new IllegalArgumentException("the object you are removing doesn't exits");
     }
+
+    static void haveYouRegister(int type) {
+        if (type == -1)
+            throw new IllegalArgumentException("can not found a viewHolder provider,have you registered the model class??");
+    }
 }
