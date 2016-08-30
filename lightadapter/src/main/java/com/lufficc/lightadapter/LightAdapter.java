@@ -23,7 +23,7 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private LayoutInflater layoutInflater;
 
-    public void register(@NonNull Class model, @NonNull ViewHolderProvider viewHolderProvider) {
+    public <Model, VH extends RecyclerView.ViewHolder> void register(@NonNull Class<Model> model, @NonNull ViewHolderProvider<Model, VH> viewHolderProvider) {
         synchronized (this) {
             if (models.contains(model))
                 throw new IllegalArgumentException("You have registered this model:" + model.getName());
@@ -102,7 +102,7 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void setData(Collection<?> initData) {
         data.clear();
         data.addAll(initData);
-        notifyDataSetChanged();
+        notifyItemRangeInserted(headers.size(), data.size());
     }
 
     public void addData(Collection<?> newData) {
