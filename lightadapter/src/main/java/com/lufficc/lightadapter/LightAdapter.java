@@ -32,6 +32,16 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
+    public void unRegister(Class model) {
+        int position = models.indexOf(model);
+        CheckUtil.checkExits(position);
+        synchronized (this) {
+            models.remove(position);
+            viewHolderProviders.remove(position);
+        }
+    }
+
+
     private boolean positionInHeaders(int position) {
         return position >= 0 && position < headers.size();
     }
