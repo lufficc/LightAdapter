@@ -165,7 +165,4 @@ public class FooterViewHolderProvider extends ViewHolderProvider<FooterModel, Fo
             errorView(errorMsg, errorIcon);
         }
     }
-
-
-
 }

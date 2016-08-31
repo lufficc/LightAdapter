@@ -76,12 +76,7 @@ public class LoadMoreActivity extends AppCompatActivity implements OnDataClickLi
     }
 
     void addData() {
-        for (int i = 0; i < 20; i++) {
-            if (random.nextBoolean())
-                adapter.addData(new TextModel("Stay hungry,stay foolish  " + i));
-            else
-                adapter.addData(new ImgModel(R.mipmap.ic_launcher));
-        }
+        adapter.addData(DataSource.data());
     }
 
     @Override

@@ -54,10 +54,11 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public void unRegister(Class model) {
         int position = models.indexOf(model);
-        CheckUtil.checkExits(position);
-        synchronized (this) {
-            models.remove(position);
-            viewHolderProviders.remove(position);
+        if (CheckUtil.checkExits(position)) {
+            synchronized (this) {
+                models.remove(position);
+                viewHolderProviders.remove(position);
+            }
         }
     }
 
@@ -87,7 +88,9 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             type = models.indexOf(footers.get(position2Footer(position)).getClass());
         else
             type = models.indexOf(data.get(position2Data(position)).getClass());
-        CheckUtil.haveYouRegister(type);
+        if (CheckUtil.haveYouRegistered(type)) {
+            throw new RuntimeException("you don't register this model");
+        }
         return type;
     }
 

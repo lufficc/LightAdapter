@@ -100,7 +100,7 @@ public class FooterModel {
     }
 
     /**
-     * tell tha adapter there will be more data ,so the progress will show,and the load more callback will be invoked.
+     * tell the adapter there will be more data ,so the progress will show,and the load more callback will be invoked.
      */
     public void canLoadMore() {
         if (footerViewHolder != null) {

@@ -28,6 +28,5 @@ public class HeaderViewProvider extends ViewHolderProvider<HeaderModel, HeaderVi
         HeaderViewHolder(View itemView) {
             super(itemView);
         }
-
     }
 }

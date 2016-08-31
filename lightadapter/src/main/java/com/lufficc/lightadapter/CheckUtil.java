@@ -13,7 +13,7 @@ class CheckUtil {
         return  (position != -1);
     }
 
-    static boolean haveYouRegister(int type) {
+    static boolean haveYouRegistered(int type) {
         return (type == -1);
     }
 }

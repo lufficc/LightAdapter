@@ -40,13 +40,7 @@ public class MultiItemActivity extends AppCompatActivity implements OnDataClickL
         adapter.addHeader(new HeaderModel());
         adapter.setOnDataClickListener(this);
         adapter.setOnHeaderClickListener(this);
-        for (int i=0;i<50;i++)
-        {
-            if (random.nextBoolean())
-                adapter.addData(new TextModel("Stay hungry,stay foolish  "+i));
-            else
-                adapter.addData(new ImgModel(R.mipmap.ic_launcher));
-        }
+        adapter.addData(DataSource.data());
 
     }
 

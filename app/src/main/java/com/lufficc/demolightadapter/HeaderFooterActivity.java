@@ -34,6 +34,7 @@ public class HeaderFooterActivity extends AppCompatActivity implements OnDataCli
         adapter.register(TextModel.class, new TextViewProvider());
         adapter.setOnDataClickListener(this);
         adapter.setOnHeaderClickListener(this);
+        adapter.addData(DataSource.data());
     }
 
     private void init() {
