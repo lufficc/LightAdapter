@@ -26,13 +26,8 @@ public class FooterViewHolderProvider extends ViewHolderProvider<FooterModel, Fo
     }
 
     class FooterViewHolder extends RecyclerView.ViewHolder {
-        private static final int STATE_LOAD_MORE = 0;
-        private static final int STATE_NO_MORE = 1;
-        private static final int STATE_GONE = 2;
-        private static final int STATE_ERROR = 3;
 
-        private int state = FooterViewHolder.STATE_LOAD_MORE;
-        private FooterModel.LoadMoreListener loadMoreListener;
+        private int state = FooterState.STATE_LOAD_MORE;
 
         TextView footerText;
 
@@ -72,25 +67,37 @@ public class FooterViewHolderProvider extends ViewHolderProvider<FooterModel, Fo
         }
 
         void onBind(FooterModel footerModel) {
+            bindListener(footerModel);
             switch (state) {
-                case STATE_LOAD_MORE:
+                case FooterState.STATE_LOAD_MORE:
                     loadMoreView(footerModel.getLoadingMsg());
-                    if (loadMoreListener != null) {
-                        loadMoreListener.onLoadMore();
+                    if (footerModel.getLoadMoreListener() != null) {
+                        footerModel.getLoadMoreListener().onLoadMore();
                     }
                     break;
-                case STATE_NO_MORE:
-                    noMoreView(footerModel.getNoMoreMsg(),footerModel.getNoMoreIcon());
+                case FooterState.STATE_NO_MORE:
+                    noMoreView(footerModel.getNoMoreMsg(), footerModel.getNoMoreIcon());
                     break;
-                case STATE_ERROR:
-                    errorView(footerModel.getErrorMsg(),footerModel.getErrorIcon());
+                case FooterState.STATE_ERROR:
+                    errorView(footerModel.getErrorMsg(), footerModel.getErrorIcon());
                     break;
-                case STATE_GONE:
+                case FooterState.STATE_GONE:
                     hideView();
                     break;
             }
         }
 
+        private void bindListener(final FooterModel footerModel) {
+            if(footerModel.getOnFooterClickListener() != null)
+            {
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        footerModel.getOnFooterClickListener().onFooterClick(state);
+                    }
+                });
+            }
+        }
 
         private void errorView(String errorMsg, int errorIcon) {
             showView();
@@ -128,12 +135,12 @@ public class FooterViewHolderProvider extends ViewHolderProvider<FooterModel, Fo
         }
 
         /**
-         * @param noMoreMsg show when no more data
-         *                  tell tha adapter there will not be data ,so the progress will hide,and the load more callback will not be invoked.
+         * @param noMoreMsg  show when no more data
+         *                   tell tha adapter there will not be data ,so the progress will hide,and the load more callback will not be invoked.
          * @param noMoreIcon
          */
         void noMoreData(String noMoreMsg, int noMoreIcon) {
-            state = FooterViewHolder.STATE_NO_MORE;
+            state = FooterState.STATE_NO_MORE;
             noMoreView(noMoreMsg, noMoreIcon);
         }
 
@@ -141,7 +148,7 @@ public class FooterViewHolderProvider extends ViewHolderProvider<FooterModel, Fo
          * tell tha adapter there will be more data ,so the progress will show,and the load more callback will be invoked.
          */
         void canLoadMore(String loadMoreMsg) {
-            state = FooterViewHolder.STATE_LOAD_MORE;
+            state = FooterState.STATE_LOAD_MORE;
             loadMoreView(loadMoreMsg);
         }
 
@@ -149,18 +156,16 @@ public class FooterViewHolderProvider extends ViewHolderProvider<FooterModel, Fo
          * set visibility gone
          */
         void hideFooter() {
-            state = FooterViewHolder.STATE_GONE;
+            state = FooterState.STATE_GONE;
             hideView();
         }
 
         void errorOccur(String errorMsg, int errorIcon) {
-            state = FooterViewHolder.STATE_ERROR;
+            state = FooterState.STATE_ERROR;
             errorView(errorMsg, errorIcon);
         }
-
-        void setLoadMoreListener(FooterModel.LoadMoreListener listener) {
-            this.loadMoreListener = listener;
-        }
     }
+
+
 
 }

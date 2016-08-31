@@ -7,14 +7,26 @@ import android.support.annotation.DrawableRes;
  */
 
 public class FooterModel {
-    private String noMoreMsg;
-    private String loadingMsg;
-    private String errorMsg;
+    private String noMoreMsg = "Loading finished";
+    private String loadingMsg = "Loading";
+    private String errorMsg = "Oops,error occurred";
     @DrawableRes
     private int noMoreIcon = R.mipmap.ic_success;
     @DrawableRes
     private int errorIcon = R.mipmap.ic_error;
     private FooterViewHolderProvider.FooterViewHolder footerViewHolder;
+
+    private LoadMoreListener loadMoreListener;
+
+    public OnFooterClickListener getOnFooterClickListener() {
+        return onFooterClickListener;
+    }
+
+    public void setOnFooterClickListener(OnFooterClickListener onFooterClickListener) {
+        this.onFooterClickListener = onFooterClickListener;
+    }
+
+    private OnFooterClickListener onFooterClickListener;
 
     @DrawableRes
     public int getErrorIcon() {
@@ -35,10 +47,12 @@ public class FooterModel {
     }
 
     public void setLoadMoreListener(LoadMoreListener listener) {
-        if (footerViewHolder != null)
-            footerViewHolder.setLoadMoreListener(listener);
+        this.loadMoreListener = listener;
     }
 
+    public LoadMoreListener getLoadMoreListener() {
+        return loadMoreListener;
+    }
 
     FooterViewHolderProvider.FooterViewHolder getFooterViewHolder() {
         return footerViewHolder;
@@ -81,7 +95,7 @@ public class FooterModel {
 
     public void errorOccur() {
         if (footerViewHolder != null) {
-            footerViewHolder.errorOccur(noMoreMsg, errorIcon);
+            footerViewHolder.errorOccur(errorMsg, errorIcon);
         }
     }
 
@@ -105,5 +119,9 @@ public class FooterModel {
 
     public interface LoadMoreListener {
         void onLoadMore();
+    }
+
+    public interface OnFooterClickListener {
+        void onFooterClick(int state);
     }
 }
