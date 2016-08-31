@@ -7,7 +7,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.Toast;
@@ -45,7 +44,6 @@ public class HeaderFooterActivity extends AppCompatActivity implements OnDataCli
         adapter.addFooter(new TextModel("I am a footer 2."));
         adapter.addFooter(new TextModel("I am a footer 3."));
         adapter.addHeader(new BigImgModel("I am a header."));
-
 
 
         adapter.setOnDataClickListener(this);
