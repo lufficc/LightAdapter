@@ -1,0 +1,166 @@
+package com.lufficc.lightadapter;
+
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+/**
+ * Created by lufficc on 2016/8/31.
+ */
+
+public class FooterViewHolderProvider extends ViewHolderProvider<FooterModel, FooterViewHolderProvider.FooterViewHolder> {
+    @Override
+    public FooterViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
+        return new FooterViewHolder(inflater.inflate(R.layout.footer_view, parent, false));
+    }
+
+    @Override
+    public void onBindViewHolder(FooterModel footerModel, FooterViewHolder viewHolder) {
+        footerModel.setFooterViewHolder(viewHolder);
+        viewHolder.onBind(footerModel);
+    }
+
+    class FooterViewHolder extends RecyclerView.ViewHolder {
+        private static final int STATE_LOAD_MORE = 0;
+        private static final int STATE_NO_MORE = 1;
+        private static final int STATE_GONE = 2;
+        private static final int STATE_ERROR = 3;
+
+        private int state = FooterViewHolder.STATE_LOAD_MORE;
+        private FooterModel.LoadMoreListener loadMoreListener;
+
+        TextView footerText;
+
+        ProgressBar footerProgressBar;
+
+        ImageView footerIcon;
+
+        FooterViewHolder(View itemView) {
+            super(itemView);
+            footerText = (TextView) itemView.findViewById(R.id.footerText);
+            footerProgressBar = (ProgressBar) itemView.findViewById(R.id.footerProgressBar);
+            footerIcon = (ImageView) itemView.findViewById(R.id.footerIcon);
+        }
+
+        private void hideProgressBar() {
+            if (footerProgressBar.getVisibility() != View.GONE) {
+                footerProgressBar.setVisibility(View.GONE);
+            }
+        }
+
+        private void showProgressBar() {
+            if (footerProgressBar.getVisibility() != View.VISIBLE) {
+                footerProgressBar.setVisibility(View.VISIBLE);
+            }
+        }
+
+        private void hideIcon() {
+            if (footerIcon.getVisibility() != View.GONE) {
+                footerIcon.setVisibility(View.GONE);
+            }
+        }
+
+        private void showIcon() {
+            if (footerIcon.getVisibility() != View.VISIBLE) {
+                footerIcon.setVisibility(View.VISIBLE);
+            }
+        }
+
+        void onBind(FooterModel footerModel) {
+            switch (state) {
+                case STATE_LOAD_MORE:
+                    loadMoreView(footerModel.getLoadingMsg());
+                    if (loadMoreListener != null) {
+                        loadMoreListener.onLoadMore();
+                    }
+                    break;
+                case STATE_NO_MORE:
+                    noMoreView(footerModel.getNoMoreMsg(),footerModel.getNoMoreIcon());
+                    break;
+                case STATE_ERROR:
+                    errorView(footerModel.getErrorMsg(),footerModel.getErrorIcon());
+                    break;
+                case STATE_GONE:
+                    hideView();
+                    break;
+            }
+        }
+
+
+        private void errorView(String errorMsg, int errorIcon) {
+            showView();
+            hideProgressBar();
+            showIcon();
+            footerText.setText(errorMsg);
+            footerIcon.setImageResource(errorIcon);
+        }
+
+        private void loadMoreView(String msg) {
+            showView();
+            hideIcon();
+            showProgressBar();
+            footerText.setText(msg);
+        }
+
+        private void noMoreView(String msg, int noMoreIcon) {
+            showView();
+            showIcon();
+            hideProgressBar();
+            footerText.setText(msg);
+            footerIcon.setImageResource(noMoreIcon);
+        }
+
+        private void hideView() {
+            if (itemView.getVisibility() != View.GONE) {
+                itemView.setVisibility(View.GONE);
+            }
+        }
+
+        private void showView() {
+            if (itemView.getVisibility() != View.VISIBLE) {
+                itemView.setVisibility(View.VISIBLE);
+            }
+        }
+
+        /**
+         * @param noMoreMsg show when no more data
+         *                  tell tha adapter there will not be data ,so the progress will hide,and the load more callback will not be invoked.
+         * @param noMoreIcon
+         */
+        void noMoreData(String noMoreMsg, int noMoreIcon) {
+            state = FooterViewHolder.STATE_NO_MORE;
+            noMoreView(noMoreMsg, noMoreIcon);
+        }
+
+        /**
+         * tell tha adapter there will be more data ,so the progress will show,and the load more callback will be invoked.
+         */
+        void canLoadMore(String loadMoreMsg) {
+            state = FooterViewHolder.STATE_LOAD_MORE;
+            loadMoreView(loadMoreMsg);
+        }
+
+        /**
+         * set visibility gone
+         */
+        void hideFooter() {
+            state = FooterViewHolder.STATE_GONE;
+            hideView();
+        }
+
+        void errorOccur(String errorMsg, int errorIcon) {
+            state = FooterViewHolder.STATE_ERROR;
+            errorView(errorMsg, errorIcon);
+        }
+
+        void setLoadMoreListener(FooterModel.LoadMoreListener listener) {
+            this.loadMoreListener = listener;
+        }
+    }
+
+}
