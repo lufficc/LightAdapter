@@ -11,17 +11,15 @@ import android.support.v7.widget.Toolbar;
 
 import com.lufficc.demolightadapter.model.TextModel;
 import com.lufficc.demolightadapter.viewprovider.TextViewProvider;
-import com.lufficc.lightadapter.LightAdapter;
+import com.lufficc.lightadapter.FlexibleAdapter;
 import com.lufficc.lightadapter.OnDataClickListener;
-
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements OnDataClickListener{
     SwipeRefreshLayout swipeRefreshLayout;
 
     RecyclerView recyclerView;
 
-    LightAdapter adapter;
+    FlexibleAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements OnDataClickListen
                 getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin)));
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter = new LightAdapter());
+        recyclerView.setAdapter(adapter = new FlexibleAdapter());
     }
 
     @Override

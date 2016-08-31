@@ -14,12 +14,14 @@ import java.util.List;
  * Created by lufficc on 2016/8/31.
  */
 
-public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class FlexibleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<Class> models = new ArrayList<>();
     private final List<ViewHolderProvider> viewHolderProviders = new ArrayList<>();
 
     private final List<? super Object> data = new ArrayList<>();
+
     private List<? super Object> headers = new ArrayList<>();
+
     private List<? super Object> footers = new ArrayList<>();
 
     private LayoutInflater layoutInflater;
@@ -63,12 +65,16 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
 
-    private boolean positionInHeaders(int position) {
+    public boolean isHeader(int position) {
         return position >= 0 && position < headers.size();
     }
 
-    private boolean positionInFooters(int position) {
+    public boolean isFooter(int position) {
         return position < getItemCount() && position >= (headers.size() + data.size());
+    }
+
+    public boolean isData(int position) {
+        return position < (headers.size() + data.size()) && position >= headers.size();
     }
 
     private int position2Footer(int position) {
@@ -81,10 +87,10 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemViewType(int position) {
-        int type = -1;
-        if (positionInHeaders(position))
+        int type;
+        if (isHeader(position))
             type = models.indexOf(headers.get(position).getClass());
-        else if (positionInFooters(position))
+        else if (isFooter(position))
             type = models.indexOf(footers.get(position2Footer(position)).getClass());
         else
             type = models.indexOf(data.get(position2Data(position)).getClass());
@@ -105,7 +111,7 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @SuppressWarnings("unchecked")
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         int type = getItemViewType(position);
-        if (positionInHeaders(position)) {
+        if (isHeader(position)) {
             final Object header = headers.get(position);
             viewHolderProviders.get(type).onBindViewHolder(header, holder);
             if (onHeaderClickListener != null) {
@@ -116,7 +122,7 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     }
                 });
             }
-        } else if (positionInFooters(position)) {
+        } else if (isFooter(position)) {
             final Object footer = footers.get(position2Footer(position));
             viewHolderProviders.get(type).onBindViewHolder(footer, holder);
             if (onFooterClickListener != null) {
@@ -149,6 +155,19 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     /**
      * **********************************************************************************************
      */
+
+    public List<? super Object> getData() {
+        return data;
+    }
+
+    public List<? super Object> getHeaders() {
+        return headers;
+    }
+
+    public List<? super Object> getFooters() {
+        return footers;
+    }
+
 
     public void setData(Collection<?> initData) {
         data.clear();

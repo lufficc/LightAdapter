@@ -17,7 +17,7 @@ import com.lufficc.demolightadapter.model.TextModel;
 import com.lufficc.demolightadapter.viewprovider.BigImgViewProvider;
 import com.lufficc.demolightadapter.viewprovider.ImgViewProvider;
 import com.lufficc.demolightadapter.viewprovider.TextViewProvider;
-import com.lufficc.lightadapter.LightAdapter;
+import com.lufficc.lightadapter.FlexibleAdapter;
 import com.lufficc.lightadapter.OnDataClickListener;
 import com.lufficc.lightadapter.OnFooterClickListener;
 import com.lufficc.lightadapter.OnHeaderClickListener;
@@ -29,7 +29,7 @@ public class HeaderFooterActivity extends AppCompatActivity implements OnDataCli
 
     RecyclerView recyclerView;
 
-    LightAdapter adapter;
+    FlexibleAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class HeaderFooterActivity extends AppCompatActivity implements OnDataCli
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter = new LightAdapter());
+        recyclerView.setAdapter(adapter = new FlexibleAdapter());
     }
 
     @Override

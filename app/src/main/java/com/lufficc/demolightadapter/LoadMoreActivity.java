@@ -16,7 +16,7 @@ import com.lufficc.demolightadapter.viewprovider.ImgViewProvider;
 import com.lufficc.lightadapter.FooterModel;
 import com.lufficc.lightadapter.FooterState;
 import com.lufficc.lightadapter.FooterViewHolderProvider;
-import com.lufficc.lightadapter.LightAdapter;
+import com.lufficc.lightadapter.FlexibleAdapter;
 import com.lufficc.lightadapter.OnDataClickListener;
 import com.lufficc.lightadapter.OnHeaderClickListener;
 
@@ -25,7 +25,7 @@ public class LoadMoreActivity extends AppCompatActivity implements OnDataClickLi
 
     RecyclerView recyclerView;
 
-    LightAdapter adapter;
+    FlexibleAdapter adapter;
 
     FooterModel footerModel;
 
@@ -55,7 +55,7 @@ public class LoadMoreActivity extends AppCompatActivity implements OnDataClickLi
                 getResources().getDimensionPixelSize(R.dimen.zero)));
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter = new LightAdapter());
+        recyclerView.setAdapter(adapter = new FlexibleAdapter());
         swipeRefreshLayout.setOnRefreshListener(this);
     }
 
