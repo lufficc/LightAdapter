@@ -3,10 +3,12 @@ package com.lufficc.demolightadapter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.lufficc.demolightadapter.model.HeaderModel;
@@ -41,15 +43,8 @@ public class LoadMoreActivity extends AppCompatActivity implements OnDataClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter = new LightAdapter());
-        swipeRefreshLayout.setOnRefreshListener(this);
-        adapter.register(TextModel.class, new TextViewProvider());
-        adapter.register(ImgModel.class, new ImgViewProvider());
-        adapter.register(HeaderModel.class, new HeaderViewProvider());
-        adapter.register(FooterModel.class, new FooterViewHolderProvider());
+        init();
+        register();
 
         adapter.addHeader(new HeaderModel());
         adapter.addFooter(footerModel = new FooterModel());
@@ -60,12 +55,30 @@ public class LoadMoreActivity extends AppCompatActivity implements OnDataClickLi
         footerModel.setOnFooterClickListener(this);
     }
 
-    void addData()
-    {
-        for (int i=0;i<20;i++)
-        {
+    private void init() {
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.addItemDecoration(new DefaultItemDecoration(
+                ContextCompat.getColor(this, R.color.white),
+                ContextCompat.getColor(this, R.color.divider),
+                getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin)));
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter = new LightAdapter());
+        swipeRefreshLayout.setOnRefreshListener(this);
+    }
+
+    private void register() {
+        adapter.register(TextModel.class, new TextViewProvider());
+        adapter.register(ImgModel.class, new ImgViewProvider());
+        adapter.register(HeaderModel.class, new HeaderViewProvider());
+        adapter.register(FooterModel.class, new FooterViewHolderProvider());
+    }
+
+    void addData() {
+        for (int i = 0; i < 20; i++) {
             if (random.nextBoolean())
-                adapter.addData(new TextModel("Stay hungry,stay foolish  "+i));
+                adapter.addData(new TextModel("Stay hungry,stay foolish  " + i));
             else
                 adapter.addData(new ImgModel(R.mipmap.ic_launcher));
         }
@@ -82,7 +95,7 @@ public class LoadMoreActivity extends AppCompatActivity implements OnDataClickLi
         adapter.removeHeader(position);
     }
 
-    int step =0;
+    int step = 0;
 
     @Override
     public void onLoadMore() {
@@ -91,32 +104,26 @@ public class LoadMoreActivity extends AppCompatActivity implements OnDataClickLi
             public void run() {
                 if (step == 0) {
                     addData();
-                }
-                else if (step == 1) {
+                } else if (step == 1) {
                     footerModel.noMoreData();
-                }
-                else if(step == 2) {
+                } else if (step == 2) {
                     footerModel.errorOccur();
-                }
-                else {
+                } else {
                     addData();
                 }
                 step++;
-                if(step > 2)
+                if (step > 2)
                     step = 0;
             }
-        },1000);
+        }, 1000);
     }
 
     @Override
     public void onFooterClick(int state) {
-        if(state == FooterState.STATE_ERROR)
-        {
+        if (state == FooterState.STATE_ERROR) {
             footerModel.canLoadMore();
             onLoadMore();
-        }
-        else if(state == FooterState.STATE_NO_MORE)
-        {
+        } else if (state == FooterState.STATE_NO_MORE) {
             footerModel.canLoadMore();
             onLoadMore();
         }
@@ -130,8 +137,8 @@ public class LoadMoreActivity extends AppCompatActivity implements OnDataClickLi
                 swipeRefreshLayout.setRefreshing(false);
                 adapter.clearData();
                 footerModel.canLoadMore();
-               addData();
+                addData();
             }
-        },1000);
+        }, 1000);
     }
 }

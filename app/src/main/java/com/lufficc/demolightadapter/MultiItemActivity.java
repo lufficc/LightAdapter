@@ -5,6 +5,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.lufficc.demolightadapter.model.HeaderModel;
@@ -32,10 +33,7 @@ public class MultiItemActivity extends AppCompatActivity implements OnDataClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter = new LightAdapter());
+        init();
         adapter.register(TextModel.class, new TextViewProvider());
         adapter.register(ImgModel.class, new ImgViewProvider());
         adapter.register(HeaderModel.class, new HeaderViewProvider());
@@ -50,6 +48,14 @@ public class MultiItemActivity extends AppCompatActivity implements OnDataClickL
                 adapter.addData(new ImgModel(R.mipmap.ic_launcher));
         }
 
+    }
+
+    private void init() {
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter = new LightAdapter());
     }
 
     @Override

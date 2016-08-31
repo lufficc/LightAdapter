@@ -18,12 +18,15 @@
         </activity>
         <activity
             android:name=".HeaderFooterActivity"
+            android:label="HeaderFooterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoadMoreActivity"
+            android:label="LoadMoreActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MultiItemActivity"
+            android:label="MultiItemActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
 

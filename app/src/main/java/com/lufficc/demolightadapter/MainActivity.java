@@ -2,10 +2,12 @@ package com.lufficc.demolightadapter;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import com.lufficc.demolightadapter.model.TextModel;
 import com.lufficc.demolightadapter.viewprovider.TextViewProvider;
@@ -27,15 +29,23 @@ public class MainActivity extends AppCompatActivity implements OnDataClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter = new LightAdapter());
+        init();
         adapter.register(TextModel.class, new TextViewProvider());
         adapter.setOnDataClickListener(this);
         adapter.addData(new TextModel("Multi type item"));
         adapter.addData(new TextModel("Header and footer"));
         adapter.addData(new TextModel("load more footer"));
+    }
+
+    private void init() {
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.addItemDecoration(new DefaultItemDecoration(ContextCompat.getColor(this, R.color.white),
+                ContextCompat.getColor(this, R.color.divider),
+                getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin)));
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter = new LightAdapter());
     }
 
     @Override
