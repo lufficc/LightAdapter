@@ -11,10 +11,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import com.lufficc.demolightadapter.model.HeaderModel;
+import com.lufficc.demolightadapter.model.BigImgModel;
 import com.lufficc.demolightadapter.model.ImgModel;
 import com.lufficc.demolightadapter.model.TextModel;
-import com.lufficc.demolightadapter.viewprovider.HeaderViewProvider;
+import com.lufficc.demolightadapter.viewprovider.BigImgViewProvider;
 import com.lufficc.demolightadapter.viewprovider.ImgViewProvider;
 import com.lufficc.demolightadapter.viewprovider.TextViewProvider;
 import com.lufficc.lightadapter.FooterModel;
@@ -46,7 +46,6 @@ public class LoadMoreActivity extends AppCompatActivity implements OnDataClickLi
         init();
         register();
 
-        adapter.addHeader(new HeaderModel());
         adapter.addFooter(footerModel = new FooterModel());
         adapter.setOnDataClickListener(this);
         adapter.setOnHeaderClickListener(this);
@@ -71,7 +70,7 @@ public class LoadMoreActivity extends AppCompatActivity implements OnDataClickLi
     private void register() {
         adapter.register(TextModel.class, new TextViewProvider());
         adapter.register(ImgModel.class, new ImgViewProvider());
-        adapter.register(HeaderModel.class, new HeaderViewProvider());
+        adapter.register(BigImgModel.class, new BigImgViewProvider());
         adapter.register(FooterModel.class, new FooterViewHolderProvider());
     }
 

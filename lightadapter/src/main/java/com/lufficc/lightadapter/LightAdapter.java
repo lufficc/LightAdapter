@@ -252,7 +252,7 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         int size = data.size();
         if (size != 0) {
             data.clear();
-            notifyItemRangeRemoved(headers.size(), size);
+            notifyDataSetChanged();
         }
     }
 

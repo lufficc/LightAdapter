@@ -2,4 +2,8 @@
     <string name="app_name">DemoLightAdapter</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="am_a_header">Am a header?</string>
+    <string name="lufficc">lufficc</string>
+    <string name="info">This is a light library for recyclerView adapter.It is flexed adn fast!</string>
+    <string name="light_adapter">Light Adapter</string>
+    <string name="add_data">Add data</string>
 </resources>

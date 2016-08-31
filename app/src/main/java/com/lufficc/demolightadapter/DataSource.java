@@ -1,7 +1,7 @@
 package com.lufficc.demolightadapter;
 
+import com.lufficc.demolightadapter.model.BigImgModel;
 import com.lufficc.demolightadapter.model.ImgModel;
-import com.lufficc.demolightadapter.model.TextModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +18,8 @@ public class DataSource {
         List<Object> list = new ArrayList<>();
         for (int i=0;i<50;i++)
         {
-            if (random.nextBoolean())
-                list.add(new TextModel("Stay hungry,stay foolish  "+i));
+            if (random.nextInt(10) > 8)
+                list.add(new BigImgModel("Stay hungry,stay foolish  "+i));
             else
                 list.add(new ImgModel(R.mipmap.ic_img));
         }
