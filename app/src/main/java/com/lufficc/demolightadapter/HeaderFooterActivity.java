@@ -34,7 +34,7 @@ public class HeaderFooterActivity extends AppCompatActivity implements OnDataCli
         adapter.register(TextModel.class, new TextViewProvider());
         adapter.setOnDataClickListener(this);
         adapter.setOnHeaderClickListener(this);
-        adapter.addData(DataSource.data());
+        adapter.addData(DataSource.multiData());
     }
 
     private void init() {
@@ -43,7 +43,7 @@ public class HeaderFooterActivity extends AppCompatActivity implements OnDataCli
         recyclerView.addItemDecoration(new DefaultItemDecoration(
                 ContextCompat.getColor(this, R.color.white),
                 ContextCompat.getColor(this, R.color.divider),
-                getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin)));
+                getResources().getDimensionPixelSize(R.dimen.zero)));
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter = new LightAdapter());

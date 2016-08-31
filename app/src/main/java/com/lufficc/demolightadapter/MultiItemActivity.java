@@ -1,6 +1,7 @@
 package com.lufficc.demolightadapter;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,12 +41,16 @@ public class MultiItemActivity extends AppCompatActivity implements OnDataClickL
         adapter.addHeader(new BigImgModel("I am a Header"));
         adapter.setOnDataClickListener(this);
         adapter.setOnHeaderClickListener(this);
-        adapter.addData(DataSource.data());
+        adapter.addData(DataSource.multiData());
     }
 
     private void init() {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.addItemDecoration(new DefaultItemDecoration(
+                ContextCompat.getColor(this, R.color.white),
+                ContextCompat.getColor(this, R.color.divider),
+                getResources().getDimensionPixelSize(R.dimen.zero)));
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter = new LightAdapter());

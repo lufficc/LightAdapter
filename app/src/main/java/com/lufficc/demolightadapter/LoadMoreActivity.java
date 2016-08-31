@@ -60,7 +60,7 @@ public class LoadMoreActivity extends AppCompatActivity implements OnDataClickLi
         recyclerView.addItemDecoration(new DefaultItemDecoration(
                 ContextCompat.getColor(this, R.color.white),
                 ContextCompat.getColor(this, R.color.divider),
-                getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin)));
+                getResources().getDimensionPixelSize(R.dimen.zero)));
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter = new LightAdapter());
@@ -75,7 +75,7 @@ public class LoadMoreActivity extends AppCompatActivity implements OnDataClickLi
     }
 
     void addData() {
-        adapter.addData(DataSource.data());
+        adapter.addData(DataSource.ImgModel());
     }
 
     @Override
