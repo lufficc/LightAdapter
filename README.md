@@ -72,8 +72,14 @@ adapter.register(YourFooterModel.class, new YourFooterModelViewProvider());
 
     public void clearFooters();
 ```
+## 3. Listeners
+``` java
+    public void setOnFooterClickListener(OnFooterClickListener onFooterClickListener);//为Footer添加点击事件
 
+    public void setOnHeaderClickListener(OnHeaderClickListener onHeaderClickListener);//为Header添加点击事件
 
+    public void setOnDataClickListener(OnDataClickListener onDataClickListener);//为内容添加点击事件
+```
 
 
 License
