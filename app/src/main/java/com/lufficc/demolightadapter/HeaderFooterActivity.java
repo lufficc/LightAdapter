@@ -22,11 +22,9 @@ import com.lufficc.lightadapter.OnDataClickListener;
 import com.lufficc.lightadapter.OnFooterClickListener;
 import com.lufficc.lightadapter.OnHeaderClickListener;
 
-import java.util.Random;
+import java.util.Locale;
 
 public class HeaderFooterActivity extends AppCompatActivity implements OnDataClickListener, OnHeaderClickListener, OnFooterClickListener {
-    private Random random = new Random();
-
     SwipeRefreshLayout swipeRefreshLayout;
 
     RecyclerView recyclerView;
@@ -75,13 +73,12 @@ public class HeaderFooterActivity extends AppCompatActivity implements OnDataCli
     @SuppressLint("DefaultLocale")
     @Override
     public void onHeaderClick(int position, Object header) {
-        Toast.makeText(this, ((BigImgModel) header).getInfo() + String.format("[position:%d]", position), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, ((BigImgModel) header).getInfo() + String.format(Locale.CHINA, "[position:%d]", position), Toast.LENGTH_SHORT).show();
     }
 
-    @SuppressLint("DefaultLocale")
     @Override
     public void onFooterClick(int position, Object footer) {
-        Toast.makeText(this, ((TextModel) footer).getText() + String.format("[position:%d]", position), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, ((TextModel) footer).getText() + String.format(Locale.CHINA, "[position:%d]", position), Toast.LENGTH_SHORT).show();
         if (position == 2)
             adapter.removeFooter(2);
     }

@@ -20,11 +20,7 @@ import com.lufficc.lightadapter.LightAdapter;
 import com.lufficc.lightadapter.OnDataClickListener;
 import com.lufficc.lightadapter.OnHeaderClickListener;
 
-import java.util.Random;
-
 public class LoadMoreActivity extends AppCompatActivity implements OnDataClickListener, OnHeaderClickListener, FooterModel.LoadMoreListener, FooterModel.OnFooterClickListener, SwipeRefreshLayout.OnRefreshListener {
-    private Random random = new Random();
-
     SwipeRefreshLayout swipeRefreshLayout;
 
     RecyclerView recyclerView;

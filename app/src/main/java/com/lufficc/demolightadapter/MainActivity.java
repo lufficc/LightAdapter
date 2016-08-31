@@ -17,8 +17,6 @@ import com.lufficc.lightadapter.OnDataClickListener;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements OnDataClickListener{
-    private Random random = new Random();
-
     SwipeRefreshLayout swipeRefreshLayout;
 
     RecyclerView recyclerView;
