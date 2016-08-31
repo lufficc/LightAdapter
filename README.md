@@ -1,10 +1,13 @@
 # LightAdapter
-一个为`RecyclerView`打造的轻量级，可配置化，无侵入性，快速的Adapter(Inspired by[drakeet/MultiType](https://github.com/drakeet/MultiType))
+一个为`RecyclerView`打造的轻量级，可配置化，无侵入性，快速的Adapter。(Inspired by[drakeet/MultiType](https://github.com/drakeet/MultiType))
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 
-
-
+我们使用`RecyclerView`的Adapter无非就几个目的：
+1. 基本使用
+1. 显示多种类型试图
+1. 添加header和footer
+1. 滑到底部自动加载更多
 
 
 
