@@ -6,7 +6,7 @@
 我们使用`RecyclerView`的Adapter无非就几个目的：
 
 1. 基本使用
-1. 显示多种类型试图
+1. 显示多种类视图
 1. 添加header和footer
 1. 滑到底部自动加载更多（加载失败，重新加载等多种状态）
 
@@ -74,28 +74,43 @@ adapter.register(YourFooterModel.class, new YourFooterModelViewProvider());
 ```
 ## 3. Listeners
 ``` java
-    public void setOnFooterClickListener(OnFooterClickListener onFooterClickListener);//为Footer添加点击事件
+adapter.setOnFooterClickListener(OnFooterClickListener onFooterClickListener);//为Footer添加点击事件
 
-    public void setOnHeaderClickListener(OnHeaderClickListener onHeaderClickListener);//为Header添加点击事件
+adapter.setOnHeaderClickListener(OnHeaderClickListener onHeaderClickListener);//为Header添加点击事件
 
-    public void setOnDataClickListener(OnDataClickListener onDataClickListener);//为内容添加点击事件
+adapter.setOnDataClickListener(OnDataClickListener onDataClickListener);//为内容添加点击事件
 ```
 ## 4. LoadMoreFooter
 如果你要使用加载更多功能，只需要注册就行：
 ``` java
 adapter.register(LoadMoreFooterModel.class, new LoadMoreFooterViewHolderProvider());
 
-LoadMoreFooterModel loadMoreFooterModel;
+LoadMoreFooterModel loadMoreFooterModel = new LoadMoreFooterModel();
 
 adapter.addFooter(loadMoreFooterModel);
 ```
 然后：
 
 ``` java
-public void noMoreData();//没有更多数据的时候调用
-public void errorOccur(); //出错的时候调用
-public void canLoadMore(); //有更多数据（一般为刷新的时候）的时候调用
+loadMoreFooterModel.noMoreData();//没有更多数据的时候调用
+loadMoreFooterModel.errorOccur(); //出错的时候调用
+loadMoreFooterModel.canLoadMore(); //有更多数据（一般为刷新的时候）的时候调用
 ```
+自定义配置：
+``` java
+loadMoreFooterModel.setErrorIcon(int DrawableRes);
+loadMoreFooterModel.setNoMoreIcon(int DrawableRes);
+loadMoreFooterModel.setErrorMsg(String errorMsg);
+loadMoreFooterModel.setNoMoreMsg(String errorMsg);
+```
+添加自定义事件：
+``` java
+// 添加加载更多的回调，加载数据
+loadMoreFooterModel.setLoadMoreListener(LoadMoreListener listener)
+// 添加footer的点击事件，比如恢复加载
+setOnFooterClickListener(OnFooterClickListener onFooterClickListener)
+```
+
 
 License
 -------
