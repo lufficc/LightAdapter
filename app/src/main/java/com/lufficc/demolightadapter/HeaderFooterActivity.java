@@ -1,20 +1,21 @@
 package com.lufficc.demolightadapter;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.lufficc.demolightadapter.model.TextModel;
 import com.lufficc.demolightadapter.viewprovider.TextViewProvider;
 import com.lufficc.lightadapter.LightAdapter;
 import com.lufficc.lightadapter.OnDataClickListener;
+import com.lufficc.lightadapter.OnHeaderClickListener;
 
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity implements OnDataClickListener{
+public class HeaderFooterActivity extends AppCompatActivity implements OnDataClickListener, OnHeaderClickListener {
     private Random random = new Random();
 
     SwipeRefreshLayout swipeRefreshLayout;
@@ -33,27 +34,17 @@ public class MainActivity extends AppCompatActivity implements OnDataClickListen
         recyclerView.setAdapter(adapter = new LightAdapter());
         adapter.register(TextModel.class, new TextViewProvider());
         adapter.setOnDataClickListener(this);
-        adapter.addData(new TextModel("Multi type item"));
-        adapter.addData(new TextModel("Header and footer"));
-        adapter.addData(new TextModel("load more footer"));
+        adapter.setOnHeaderClickListener(this);
     }
 
     @Override
     public void onDataClick(int position, Object data) {
-        Class activity;
-        switch (position)
-        {
-            case 0:
-                activity = MultiItemActivity.class;
-                break;
-            case 1:
-                activity = HeaderFooterActivity.class;
-                break;
-            default:
-                activity = LoadMoreActivity.class;
-            break;
-        }
-        startActivity(new Intent(this,activity));
+        Log.i("main", "pos:" + position);
+        adapter.removeData(position);
     }
 
+    @Override
+    public void onHeaderClick(int position, Object header) {
+        adapter.removeHeader(position);
+    }
 }
