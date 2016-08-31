@@ -4,6 +4,7 @@
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 
 我们使用`RecyclerView`的Adapter无非就几个目的：
+
 1. 基本使用
 1. 显示多种类型试图
 1. 添加header和footer
