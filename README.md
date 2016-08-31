@@ -76,6 +76,9 @@ adapter.register(YourFooterModel.class, new YourFooterModelViewProvider());
 第二个参数为你需要继承`ViewHolderProvider`来返回ViewHolder和完成数据绑定。
 
 你可以随时动态的注册你的Model,或者取消注册`adapter.unRegister(Class model)`。注册完毕之后，大功告成，只管添加你的数据，不用调用`notifyItem**`之类的方法，LightAdapter会根据你的操作自动调用最合适的。
+
+注册完成之后，LightAdapter会自动将你的数据映射到对应的视图上，你不用关心其中的逻辑。
+
 ## 3. 填充数据
 ``` java
     public void setData(Collection<?> initData);
