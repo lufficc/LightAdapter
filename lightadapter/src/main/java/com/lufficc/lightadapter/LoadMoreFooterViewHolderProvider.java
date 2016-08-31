@@ -14,14 +14,14 @@ import android.widget.TextView;
  * Created by lufficc on 2016/8/31.
  */
 
-public class FooterViewHolderProvider extends ViewHolderProvider<FooterModel, FooterViewHolderProvider.FooterViewHolder> {
+public class LoadMoreFooterViewHolderProvider extends ViewHolderProvider<LoadMoreFooterModel, LoadMoreFooterViewHolderProvider.FooterViewHolder> {
     @Override
     public FooterViewHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
         return new FooterViewHolder(inflater.inflate(R.layout.footer_view, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(FooterModel footerModel, FooterViewHolder viewHolder) {
+    public void onBindViewHolder(LoadMoreFooterModel footerModel, FooterViewHolder viewHolder) {
         footerModel.setFooterViewHolder(viewHolder);
         viewHolder.onBind(footerModel);
     }
@@ -67,7 +67,7 @@ public class FooterViewHolderProvider extends ViewHolderProvider<FooterModel, Fo
             }
         }
 
-        void onBind(FooterModel footerModel) {
+        void onBind(LoadMoreFooterModel footerModel) {
             bindListener(footerModel);
             initItemViewState(footerModel);
             switch (state) {
@@ -89,7 +89,7 @@ public class FooterViewHolderProvider extends ViewHolderProvider<FooterModel, Fo
             }
         }
 
-        private void initItemViewState(FooterModel footerModel) {
+        private void initItemViewState(LoadMoreFooterModel footerModel) {
             if (footerModel.isFullSpan()) {
                 StaggeredGridLayoutManager.LayoutParams layoutParams = new StaggeredGridLayoutManager.
                         LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -98,7 +98,7 @@ public class FooterViewHolderProvider extends ViewHolderProvider<FooterModel, Fo
             }
         }
 
-        private void bindListener(final FooterModel footerModel) {
+        private void bindListener(final LoadMoreFooterModel footerModel) {
             if (footerModel.getOnFooterClickListener() != null) {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

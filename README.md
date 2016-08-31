@@ -15,6 +15,12 @@
 
 LightAdapter的核心其实是多类型视图，是看了[drakeet/MultiType](https://github.com/drakeet/MultiType)的开源库受到启发并进行了改进（没用采用全局静态注册，注册时添加泛型约束，减少出错）。
 
+先说滑到底部自动加载更多原理：
+
+`RecyclerView`的Adapter的原理大家都知道：当某一个Item显示在屏幕中时，会调用Adapter的`onBindViewHolder`方法来让你绑定数据，但我们可以不用来绑定数据，列表中的最后一个Item出现时，
+在这个Item会调用`onBindViewHolder`方法，所以如果增加一个回调，那这个Item不就是一个可以加载更多的Item了吗？原理大致就是这样了。。。
+
+所以header和footer其实只是一个和你的普通数据类型不一样的Item罢了，
 
 
 

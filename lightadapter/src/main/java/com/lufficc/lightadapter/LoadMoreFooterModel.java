@@ -6,7 +6,7 @@ import android.support.annotation.DrawableRes;
  * Created by lufficc on 2016/8/31.
  */
 
-public class FooterModel {
+public class LoadMoreFooterModel {
     private String noMoreMsg = "Loading finished";
     private String loadingMsg = "Loading";
     private String errorMsg = "Oops,error occurred";
@@ -15,7 +15,7 @@ public class FooterModel {
     private int noMoreIcon = R.mipmap.ic_success;
     @DrawableRes
     private int errorIcon = R.mipmap.ic_error;
-    private FooterViewHolderProvider.FooterViewHolder footerViewHolder;
+    private LoadMoreFooterViewHolderProvider.FooterViewHolder footerViewHolder;
 
     private LoadMoreListener loadMoreListener;
 
@@ -55,11 +55,11 @@ public class FooterModel {
         return loadMoreListener;
     }
 
-    FooterViewHolderProvider.FooterViewHolder getFooterViewHolder() {
+    LoadMoreFooterViewHolderProvider.FooterViewHolder getFooterViewHolder() {
         return footerViewHolder;
     }
 
-    void setFooterViewHolder(FooterViewHolderProvider.FooterViewHolder footerViewHolder) {
+    void setFooterViewHolder(LoadMoreFooterViewHolderProvider.FooterViewHolder footerViewHolder) {
         this.footerViewHolder = footerViewHolder;
     }
 

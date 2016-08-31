@@ -12,21 +12,21 @@ import android.util.Log;
 
 import com.lufficc.demolightadapter.model.TextModel;
 import com.lufficc.demolightadapter.viewprovider.TextViewProvider;
-import com.lufficc.lightadapter.FooterModel;
 import com.lufficc.lightadapter.FooterState;
-import com.lufficc.lightadapter.FooterViewHolderProvider;
+import com.lufficc.lightadapter.LoadMoreFooterViewHolderProvider;
 import com.lufficc.lightadapter.LightAdapter;
+import com.lufficc.lightadapter.LoadMoreFooterModel;
 import com.lufficc.lightadapter.OnDataClickListener;
 import com.lufficc.lightadapter.OnHeaderClickListener;
 
-public class GridLoadMoreActivity extends AppCompatActivity implements OnDataClickListener, OnHeaderClickListener, FooterModel.LoadMoreListener, FooterModel.OnFooterClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class GridLoadMoreActivity extends AppCompatActivity implements OnDataClickListener, OnHeaderClickListener, LoadMoreFooterModel.LoadMoreListener, LoadMoreFooterModel.OnFooterClickListener, SwipeRefreshLayout.OnRefreshListener {
     SwipeRefreshLayout swipeRefreshLayout;
 
     RecyclerView recyclerView;
 
     LightAdapter adapter;
 
-    FooterModel footerModel;
+    LoadMoreFooterModel footerModel;
 
     Handler handler = new Handler(Looper.getMainLooper());
 
@@ -37,7 +37,7 @@ public class GridLoadMoreActivity extends AppCompatActivity implements OnDataCli
         init();
         register();
 
-        adapter.addFooter(footerModel = new FooterModel());
+        adapter.addFooter(footerModel = new LoadMoreFooterModel());
         adapter.setOnDataClickListener(this);
         adapter.setOnHeaderClickListener(this);
         addData();
@@ -51,8 +51,8 @@ public class GridLoadMoreActivity extends AppCompatActivity implements OnDataCli
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         adapter = new LightAdapter();
-        GridLayoutManager layoutManager = new GridLayoutManager(this,2);
-        layoutManager.setSpanSizeLookup(adapter.spanSizeLookup(2,2));
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        layoutManager.setSpanSizeLookup(adapter.spanSizeLookup(2, 2));
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -60,7 +60,7 @@ public class GridLoadMoreActivity extends AppCompatActivity implements OnDataCli
 
     private void register() {
         adapter.register(TextModel.class, new TextViewProvider());
-        adapter.register(FooterModel.class, new FooterViewHolderProvider());
+        adapter.register(LoadMoreFooterModel.class, new LoadMoreFooterViewHolderProvider());
     }
 
     void addData() {

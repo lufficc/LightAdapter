@@ -13,21 +13,21 @@ import android.util.Log;
 
 import com.lufficc.demolightadapter.model.ImgModel;
 import com.lufficc.demolightadapter.viewprovider.ImgViewProvider;
-import com.lufficc.lightadapter.FooterModel;
 import com.lufficc.lightadapter.FooterState;
-import com.lufficc.lightadapter.FooterViewHolderProvider;
 import com.lufficc.lightadapter.LightAdapter;
+import com.lufficc.lightadapter.LoadMoreFooterModel;
+import com.lufficc.lightadapter.LoadMoreFooterViewHolderProvider;
 import com.lufficc.lightadapter.OnDataClickListener;
 import com.lufficc.lightadapter.OnHeaderClickListener;
 
-public class LoadMoreActivity extends AppCompatActivity implements OnDataClickListener, OnHeaderClickListener, FooterModel.LoadMoreListener, FooterModel.OnFooterClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class LoadMoreActivity extends AppCompatActivity implements OnDataClickListener, OnHeaderClickListener, LoadMoreFooterModel.LoadMoreListener, LoadMoreFooterModel.OnFooterClickListener, SwipeRefreshLayout.OnRefreshListener {
     SwipeRefreshLayout swipeRefreshLayout;
 
     RecyclerView recyclerView;
 
     LightAdapter adapter;
 
-    FooterModel footerModel;
+    LoadMoreFooterModel footerModel;
 
     Handler handler = new Handler(Looper.getMainLooper());
 
@@ -38,7 +38,7 @@ public class LoadMoreActivity extends AppCompatActivity implements OnDataClickLi
         init();
         register();
 
-        adapter.addFooter(footerModel = new FooterModel());
+        adapter.addFooter(footerModel = new LoadMoreFooterModel());
         adapter.setOnDataClickListener(this);
         adapter.setOnHeaderClickListener(this);
         addData();
@@ -61,7 +61,7 @@ public class LoadMoreActivity extends AppCompatActivity implements OnDataClickLi
 
     private void register() {
         adapter.register(ImgModel.class, new ImgViewProvider());
-        adapter.register(FooterModel.class, new FooterViewHolderProvider());
+        adapter.register(LoadMoreFooterModel.class, new LoadMoreFooterViewHolderProvider());
     }
 
     void addData() {
