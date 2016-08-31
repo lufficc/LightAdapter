@@ -98,8 +98,10 @@ loadMoreFooterModel.canLoadMore(); //有更多数据（一般为刷新的时候�
 ```
 自定义配置：
 ``` java
+//自定义小图标
 loadMoreFooterModel.setErrorIcon(int DrawableRes);
 loadMoreFooterModel.setNoMoreIcon(int DrawableRes);
+// 自定义显示信息
 loadMoreFooterModel.setErrorMsg(String errorMsg);
 loadMoreFooterModel.setNoMoreMsg(String errorMsg);
 ```
@@ -108,9 +110,9 @@ loadMoreFooterModel.setNoMoreMsg(String errorMsg);
 // 添加加载更多的回调，加载数据
 loadMoreFooterModel.setLoadMoreListener(LoadMoreListener listener)
 // 添加footer的点击事件，比如恢复加载
-setOnFooterClickListener(OnFooterClickListener onFooterClickListener)
+loadMoreFooterModel.setOnFooterClickListener(OnFooterClickListener onFooterClickListener)
 ```
-
+## 详细的使用看Demo，基本包含所有使用场景
 
 License
 -------
