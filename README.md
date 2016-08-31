@@ -18,7 +18,7 @@ LightAdapter的核心其实是多类型视图，是看了[drakeet/MultiType](htt
 先说滑到底部自动加载更多原理：
 
 `RecyclerView`的Adapter的原理大家都知道：当某一个Item显示在屏幕中时，会调用Adapter的`onBindViewHolder`方法来让你绑定数据，但我们可以不用来绑定数据，列表中的最后一个Item出现时，
-在这个Item会调用`onBindViewHolder`方法，所以如果增加一个回调，那这个Item不就是一个可以加载更多的Item了吗？原理大致就是这样了。。。
+在这个Item会调用`onBindViewHolder`方法，所以如果增加一个回调，那这个Item不就是一个可以加载更多的Item了吗？原理就是这么简单。
 
 所以header和footer其实只是一个和你的普通数据类型不一样的Item罢了，可以加载更多的Footer也不例外，而LightAdapter的工作只是管理这些多类型Item，并不关心具体的逻辑。所以，当你不使用
 `LoadMoreFooter`时，LightAdapter便退化成普通的Adapter，而且性能没有任何损失。（ 性能测试可以参考：[drakeet/MultiType](https://github.com/drakeet/MultiType) ）
@@ -36,6 +36,12 @@ Maven
   <artifactId>lightAdapter</artifactId>
   <version>0.0.1</version>
   <type>pom</type>
+</dependency>
+```
+lvy
+``` xml
+<dependency org='com.lufficc' name='lightAdapter' rev='0.0.1'>
+  <artifact name='$AID' ext='pom'></artifact>
 </dependency>
 ```
 
