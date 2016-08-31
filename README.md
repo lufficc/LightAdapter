@@ -24,19 +24,19 @@ LightAdapter的核心其实是多类型视图，是看了[drakeet/MultiType](htt
 `LoadMoreFooter`时，LightAdapter便退化成普通的Adapter，而且性能没有任何损失。（ 性能测试可以参考：[drakeet/MultiType](https://github.com/drakeet/MultiType) ）
 
 ## 截图
-多类型视图
+*多类型视图*
 ![sample](screenshots/device-2016-08-31-223121.gif)
 
-Header and footer
+*Header and footer*
 ![sample](screenshots/device-2016-08-31-223340.gif)
 
-loadMore footer
+*loadMore footer*
 ![sample](screenshots/device-2016-08-31-223605.gif)
 
-usage of GridLayoutManager
+*usage of GridLayoutManager*
 ![sample](screenshots/device-2016-08-31-223812.gif)
 
-# 使用(详细的使用看Demo，基本包含所有使用场景,[Demo下载体验](apk/app.apk))
+## 使用(详细的使用看Demo，基本包含所有使用场景,[Demo下载体验](apk/app.apk))
 ## 1. 依赖
 Gradle:
 ```
