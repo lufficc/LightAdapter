@@ -1,5 +1,6 @@
 package com.lufficc.demolightadapter;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -8,16 +9,22 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.lufficc.demolightadapter.model.BigImgModel;
+import com.lufficc.demolightadapter.model.ImgModel;
 import com.lufficc.demolightadapter.model.TextModel;
+import com.lufficc.demolightadapter.viewprovider.BigImgViewProvider;
+import com.lufficc.demolightadapter.viewprovider.ImgViewProvider;
 import com.lufficc.demolightadapter.viewprovider.TextViewProvider;
 import com.lufficc.lightadapter.LightAdapter;
 import com.lufficc.lightadapter.OnDataClickListener;
+import com.lufficc.lightadapter.OnFooterClickListener;
 import com.lufficc.lightadapter.OnHeaderClickListener;
 
 import java.util.Random;
 
-public class HeaderFooterActivity extends AppCompatActivity implements OnDataClickListener, OnHeaderClickListener {
+public class HeaderFooterActivity extends AppCompatActivity implements OnDataClickListener, OnHeaderClickListener, OnFooterClickListener {
     private Random random = new Random();
 
     SwipeRefreshLayout swipeRefreshLayout;
@@ -31,10 +38,19 @@ public class HeaderFooterActivity extends AppCompatActivity implements OnDataCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+        adapter.register(ImgModel.class, new ImgViewProvider());
+        adapter.register(BigImgModel.class, new BigImgViewProvider());
         adapter.register(TextModel.class, new TextViewProvider());
+        adapter.addFooter(new TextModel("I am a footer 1."));
+        adapter.addFooter(new TextModel("I am a footer 2."));
+        adapter.addFooter(new TextModel("I am a footer 3."));
+        adapter.addHeader(new BigImgModel("I am a header."));
+
+
         adapter.setOnDataClickListener(this);
         adapter.setOnHeaderClickListener(this);
-        adapter.addData(DataSource.multiData());
+        adapter.setOnFooterClickListener(this);
+        adapter.addData(DataSource.ImgModel());
     }
 
     private void init() {
@@ -45,6 +61,7 @@ public class HeaderFooterActivity extends AppCompatActivity implements OnDataCli
                 ContextCompat.getColor(this, R.color.divider),
                 getResources().getDimensionPixelSize(R.dimen.zero)));
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter = new LightAdapter());
     }
@@ -55,8 +72,17 @@ public class HeaderFooterActivity extends AppCompatActivity implements OnDataCli
         adapter.removeData(position);
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void onHeaderClick(int position, Object header) {
-        adapter.removeHeader(position);
+        Toast.makeText(this, ((BigImgModel) header).getInfo() + String.format("[position:%d]", position), Toast.LENGTH_SHORT).show();
+    }
+
+    @SuppressLint("DefaultLocale")
+    @Override
+    public void onFooterClick(int position, Object footer) {
+        Toast.makeText(this, ((TextModel) footer).getText() + String.format("[position:%d]", position), Toast.LENGTH_SHORT).show();
+        if (position == 2)
+            adapter.removeFooter(2);
     }
 }

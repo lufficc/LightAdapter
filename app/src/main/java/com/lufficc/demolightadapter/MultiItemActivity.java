@@ -52,6 +52,7 @@ public class MultiItemActivity extends AppCompatActivity implements OnDataClickL
                 ContextCompat.getColor(this, R.color.divider),
                 getResources().getDimensionPixelSize(R.dimen.zero)));
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter = new LightAdapter());
     }

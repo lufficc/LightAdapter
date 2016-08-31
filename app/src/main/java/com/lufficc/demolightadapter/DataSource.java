@@ -17,7 +17,7 @@ public class DataSource {
     static List<Object> multiData()
     {
         List<Object> list = new ArrayList<>();
-        for (int i=0;i<50;i++)
+        for (int i=0;i<20;i++)
         {
             if (random.nextInt(100) > 90)
                 list.add(new BigImgModel("Stay hungry,stay foolish  "+i));
@@ -33,7 +33,7 @@ public class DataSource {
     static List<Object> ImgModel()
     {
         List<Object> list = new ArrayList<>();
-        for (int i=0;i<50;i++)
+        for (int i=0;i<20;i++)
         {
             list.add(new ImgModel(R.mipmap.ic_img));
         }

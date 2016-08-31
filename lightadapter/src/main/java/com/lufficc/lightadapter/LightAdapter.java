@@ -89,7 +89,7 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         else
             type = models.indexOf(data.get(position2Data(position)).getClass());
         if (CheckUtil.haveYouRegistered(type)) {
-            throw new RuntimeException("you don't register this model");
+            throw new NullPointerException("you don't register this model");
         }
         return type;
     }
@@ -123,7 +123,7 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        onFooterClickListener.onFooterClick(holder.getAdapterPosition(), footer);
+                        onFooterClickListener.onFooterClick(position2Footer(holder.getAdapterPosition()), footer);
                     }
                 });
             }
