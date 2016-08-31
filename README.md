@@ -45,7 +45,7 @@ lvy
 </dependency>
 ```
 
-## 1.注册Model
+## 2.注册Model
 ``` java
 adapter.register(YourModel.class, new YourModelViewProvider());
 adapter.register(YourHeaderModel.class, new YourHeaderModelViewProvider());
@@ -55,7 +55,7 @@ adapter.register(YourFooterModel.class, new YourFooterModelViewProvider());
 第二个参数为你需要继承`ViewHolderProvider`来返回ViewHolder和完成数据绑定。
 
 你可以随时动态的注册你的Model,或者取消注册`adapter.unRegister(Class model)`。注册完毕之后，大功告成，只管添加你的数据，不用调用`notifyItem**`之类的方法，LightAdapter会根据你的操作自动调用最合适的。
-## 2. 填充数据
+## 3. 填充数据
 ``` java
     public void setData(Collection<?> initData);
 
@@ -93,7 +93,7 @@ adapter.register(YourFooterModel.class, new YourFooterModelViewProvider());
 
     public void clearFooters();
 ```
-## 3. Listeners
+## 4. Listeners
 ``` java
 adapter.setOnFooterClickListener(OnFooterClickListener onFooterClickListener);//为Footer添加点击事件
 
@@ -101,7 +101,7 @@ adapter.setOnHeaderClickListener(OnHeaderClickListener onHeaderClickListener);//
 
 adapter.setOnDataClickListener(OnDataClickListener onDataClickListener);//为内容添加点击事件
 ```
-## 4. LoadMoreFooter
+## 5. LoadMoreFooter
 如果你要使用加载更多功能，只需要注册就行：
 ``` java
 adapter.register(LoadMoreFooterModel.class, new LoadMoreFooterViewHolderProvider());
