@@ -1,6 +1,7 @@
 package com.lufficc.lightadapter;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,7 @@ import java.util.List;
  * Created by lufficc on 2016/8/31.
  */
 
-public class FlexibleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<Class> models = new ArrayList<>();
     private final List<ViewHolderProvider> viewHolderProviders = new ArrayList<>();
 
@@ -150,6 +151,30 @@ public class FlexibleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public int getItemCount() {
         return data.size() + headers.size() + footers.size();
+    }
+
+
+    public GridLayoutManager.SpanSizeLookup spanSizeLookup(int headerSpan, int footerSpan) {
+        return new AdapterSpanSizeLookup(headerSpan,footerSpan);
+    }
+    private class AdapterSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
+        int headerSpan;
+        int footerSpan;
+
+        AdapterSpanSizeLookup(int headerSpan, int footerSpan) {
+            this.headerSpan = headerSpan;
+            this.footerSpan = footerSpan;
+        }
+
+        @Override
+        public int getSpanSize(int position) {
+            if (isHeader(position)) {
+                return headerSpan;
+            }
+            if (isFooter(position))
+                return footerSpan;
+            return 1;
+        }
     }
 
     /**

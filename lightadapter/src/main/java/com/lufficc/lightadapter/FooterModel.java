@@ -10,6 +10,7 @@ public class FooterModel {
     private String noMoreMsg = "Loading finished";
     private String loadingMsg = "Loading";
     private String errorMsg = "Oops,error occurred";
+    private boolean fullSpan = false;
     @DrawableRes
     private int noMoreIcon = R.mipmap.ic_success;
     @DrawableRes
@@ -97,6 +98,14 @@ public class FooterModel {
         if (footerViewHolder != null) {
             footerViewHolder.errorOccur(errorMsg, errorIcon);
         }
+    }
+
+    public boolean isFullSpan() {
+        return fullSpan;
+    }
+
+    public void setFullSpan(boolean fullSpan) {
+        this.fullSpan = fullSpan;
     }
 
     /**

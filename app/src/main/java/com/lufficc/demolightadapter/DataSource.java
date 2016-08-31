@@ -14,27 +14,24 @@ import java.util.Random;
 
 public class DataSource {
     private static Random random = new Random();
-    static List<Object> multiData()
-    {
+
+    static List<Object> multiData() {
         List<Object> list = new ArrayList<>();
-        for (int i=0;i<20;i++)
-        {
+        for (int i = 0; i < 20; i++) {
             if (random.nextInt(100) > 90)
-                list.add(new BigImgModel("Stay hungry,stay foolish  "+i));
+                list.add(new BigImgModel("Stay hungry,stay foolish  " + i));
             else if (random.nextInt(100) > 50)
                 list.add(new ImgModel(R.mipmap.ic_img));
             else {
-                list.add(new TextModel("Stay hungry,stay foolish  "+i));
+                list.add(new TextModel("Stay hungry,stay foolish  " + i));
             }
         }
         return list;
     }
 
-    static List<Object> ImgModel()
-    {
+    static List<Object> ImgModel() {
         List<Object> list = new ArrayList<>();
-        for (int i=0;i<20;i++)
-        {
+        for (int i = 0; i < 20; i++) {
             list.add(new ImgModel(R.mipmap.ic_img));
         }
         return list;

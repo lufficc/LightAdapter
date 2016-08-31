@@ -2,6 +2,7 @@ package com.lufficc.lightadapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +69,7 @@ public class FooterViewHolderProvider extends ViewHolderProvider<FooterModel, Fo
 
         void onBind(FooterModel footerModel) {
             bindListener(footerModel);
+            initItemViewState(footerModel);
             switch (state) {
                 case FooterState.STATE_LOAD_MORE:
                     loadMoreView(footerModel.getLoadingMsg());
@@ -87,9 +89,17 @@ public class FooterViewHolderProvider extends ViewHolderProvider<FooterModel, Fo
             }
         }
 
+        private void initItemViewState(FooterModel footerModel) {
+            if (footerModel.isFullSpan()) {
+                StaggeredGridLayoutManager.LayoutParams layoutParams = new StaggeredGridLayoutManager.
+                        LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                layoutParams.setFullSpan(true);
+                itemView.setLayoutParams(layoutParams);
+            }
+        }
+
         private void bindListener(final FooterModel footerModel) {
-            if(footerModel.getOnFooterClickListener() != null)
-            {
+            if (footerModel.getOnFooterClickListener() != null) {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

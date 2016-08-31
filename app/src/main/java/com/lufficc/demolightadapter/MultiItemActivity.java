@@ -15,7 +15,7 @@ import com.lufficc.demolightadapter.model.TextModel;
 import com.lufficc.demolightadapter.viewprovider.BigImgViewProvider;
 import com.lufficc.demolightadapter.viewprovider.ImgViewProvider;
 import com.lufficc.demolightadapter.viewprovider.TextViewProvider;
-import com.lufficc.lightadapter.FlexibleAdapter;
+import com.lufficc.lightadapter.LightAdapter;
 import com.lufficc.lightadapter.OnDataClickListener;
 import com.lufficc.lightadapter.OnHeaderClickListener;
 
@@ -28,7 +28,7 @@ public class MultiItemActivity extends AppCompatActivity implements OnDataClickL
 
     RecyclerView recyclerView;
 
-    FlexibleAdapter adapter;
+    LightAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class MultiItemActivity extends AppCompatActivity implements OnDataClickL
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter = new FlexibleAdapter());
+        recyclerView.setAdapter(adapter = new LightAdapter());
     }
 
     @Override
