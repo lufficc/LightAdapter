@@ -24,6 +24,21 @@ LightAdapter的核心其实是多类型视图，是看了[drakeet/MultiType](htt
 `LoadMoreFooter`时，LightAdapter便退化成普通的Adapter，而且性能没有任何损失。（ 性能测试可以参考：[drakeet/MultiType](https://github.com/drakeet/MultiType) ）
 
 # 使用
+## 1. 依赖
+Gradle:
+```
+compile 'com.lufficc:lightAdapter:0.0.1'
+```
+Maven
+``` xml
+<dependency>
+  <groupId>com.lufficc</groupId>
+  <artifactId>lightAdapter</artifactId>
+  <version>0.0.1</version>
+  <type>pom</type>
+</dependency>
+```
+
 ## 1.注册Model
 ``` java
 adapter.register(YourModel.class, new YourModelViewProvider());
