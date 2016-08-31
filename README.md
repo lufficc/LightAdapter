@@ -3,6 +3,13 @@
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 
+## 截图
+![sample](screenshots/device-2016-08-31-223121.gif)
+![sample](screenshots/device-2016-08-31-223340.gif)
+![sample](screenshots/device-2016-08-31-223605.gif)
+![sample](screenshots/device-2016-08-31-223812.gif)
+
+
 我们使用`RecyclerView`的Adapter无非就几个目的：
 
 1. 基本使用
