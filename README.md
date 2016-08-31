@@ -3,13 +3,6 @@
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 
-## 截图
-![sample](screenshots/device-2016-08-31-223121.gif)     ![sample](screenshots/device-2016-08-31-223340.gif)
-
-
-![sample](screenshots/device-2016-08-31-223605.gif)     ![sample](screenshots/device-2016-08-31-223812.gif)
-
-
 我们使用`RecyclerView`的Adapter无非就几个目的：
 
 1. 基本使用
@@ -29,6 +22,19 @@ LightAdapter的核心其实是多类型视图，是看了[drakeet/MultiType](htt
 
 所以header和footer其实只是一个和你的普通数据类型不一样的Item罢了，可以加载更多的Footer也不例外，而LightAdapter的工作只是管理这些多类型Item，并不关心具体的逻辑。所以，当你不使用
 `LoadMoreFooter`时，LightAdapter便退化成普通的Adapter，而且性能没有任何损失。（ 性能测试可以参考：[drakeet/MultiType](https://github.com/drakeet/MultiType) ）
+
+## 截图
+多类型视图
+![sample](screenshots/device-2016-08-31-223121.gif)
+
+Header and footer
+![sample](screenshots/device-2016-08-31-223340.gif)
+
+loadMore footer
+![sample](screenshots/device-2016-08-31-223605.gif)
+
+usage of GridLayoutManager
+![sample](screenshots/device-2016-08-31-223812.gif)
 
 # 使用(详细的使用看Demo，基本包含所有使用场景,[Demo下载体验](apk/app.apk))
 ## 1. 依赖
@@ -108,7 +114,7 @@ adapter.setOnHeaderClickListener(OnHeaderClickListener onHeaderClickListener);//
 
 adapter.setOnDataClickListener(OnDataClickListener onDataClickListener);//为内容添加点击事件
 ```
-## 5. LoadMoreFooter
+## 5. LoadMoreFooter (支持LinearLayoutManager,GridLayoutManager,StaggeredGridLayoutManager)
 如果你要使用加载更多功能，只需要注册就行：
 ``` java
 adapter.register(LoadMoreFooterModel.class, new LoadMoreFooterViewHolderProvider());
