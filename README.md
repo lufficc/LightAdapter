@@ -13,6 +13,7 @@
 至于下拉刷新，Google已经提供了`SwipeRefreshLayout`，它已经非常好用，无需重复造轮子，而其他的功能LightAdapter均已实现。注意,滑到底部自动加载更多
 其实不属于LightAdapter的功能，而是LightAdapter的一个扩展footer，你完全可以不用或者实现自己的footer，而对LightAdapter没有任何影响。下面说一下LightAdapter的核心：
 
+LightAdapter的核心其实是多类型视图，是看了[drakeet/MultiType](https://github.com/drakeet/MultiType)的开源库受到启发并进行了改进（没用采用全局静态注册，注册时添加泛型约束，减少出错）。
 
 
 
