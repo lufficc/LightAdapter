@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements OnDataClickListen
         adapter.addData(new TextModel("Multi type item"));
         adapter.addData(new TextModel("Header and footer"));
         adapter.addData(new TextModel("load more footer"));
+        adapter.addData(new TextModel("Grid load more footer"));
     }
 
     private void init() {
@@ -55,8 +56,11 @@ public class MainActivity extends AppCompatActivity implements OnDataClickListen
             case 1:
                 activity = HeaderFooterActivity.class;
                 break;
-            default:
+            case 2:
                 activity = LoadMoreActivity.class;
+                break;
+            default:
+                activity = GridLoadMoreActivity.class;
             break;
         }
         startActivity(new Intent(this,activity));

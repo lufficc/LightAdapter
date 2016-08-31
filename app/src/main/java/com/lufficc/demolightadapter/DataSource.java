@@ -36,4 +36,11 @@ public class DataSource {
         }
         return list;
     }
+    static List<Object> textModel() {
+        List<Object> list = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            list.add(new TextModel("Stay hungry,stay foolish  " + i));
+        }
+        return list;
+    }
 }

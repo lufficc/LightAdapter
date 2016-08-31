@@ -28,6 +28,10 @@
             android:name=".MultiItemActivity"
             android:label="MultiItemActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GridLoadMoreActivity"
+            android:label="GridLoadMoreActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
 
     </application>
