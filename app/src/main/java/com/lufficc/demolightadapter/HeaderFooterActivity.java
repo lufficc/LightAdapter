@@ -22,6 +22,7 @@ import com.lufficc.lightadapter.OnDataClickListener;
 import com.lufficc.lightadapter.OnFooterClickListener;
 import com.lufficc.lightadapter.OnHeaderClickListener;
 
+
 import java.util.Locale;
 
 public class HeaderFooterActivity extends AppCompatActivity implements OnDataClickListener, OnHeaderClickListener, OnFooterClickListener {

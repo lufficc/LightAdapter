@@ -8,8 +8,10 @@
 1. 基本使用
 1. 显示多种类型试图
 1. 添加header和footer
-1. 滑到底部自动加载更多
+1. 滑到底部自动加载更多（加载失败，重新加载等多种状态）
 
+至于下拉刷新，Google已经提供了`SwipeRefreshLayout`，它已经非常好用，无需重复造轮子，而其他的功能LightAdapter均已实现。注意,滑到底部自动加载更多
+其实不属于LightAdapter的功能，而是LightAdapter的一个扩展footer，你完全可以不用或者实现自己的footer，而对LightAdapter没有任何影响。下面说一下LightAdapter的核心：
 
 
 
