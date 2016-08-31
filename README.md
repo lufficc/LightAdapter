@@ -26,12 +26,52 @@ LightAdapter的核心其实是多类型视图，是看了[drakeet/MultiType](htt
 # 使用
 ## 1.注册Model
 ``` java
-        adapter.register(YourModel.class, new YourModelViewProvider());
-        adapter.register(YourHeaderModel.class, new YourHeaderModelViewProvider());
-        adapter.register(YourFooterModel.class, new YourFooterModelViewProvider());
+adapter.register(YourModel.class, new YourModelViewProvider());
+adapter.register(YourHeaderModel.class, new YourHeaderModelViewProvider());
+adapter.register(YourFooterModel.class, new YourFooterModelViewProvider());
 ```
 其中第一个参数为你的Model（或者叫做Entity），没有任何限制，只要是Object的子类就行（笑）。
 第二个参数为你需要继承`ViewHolderProvider`来返回ViewHolder和完成数据绑定。
+
+你可以随时动态的注册你的Model,或者取消注册`adapter.unRegister(Class model)`。注册完毕之后，大功告成，只管添加你的数据，不用调用`notifyItem**`之类的方法，LightAdapter会根据你的操作自动调用最合适的。
+## 2. 填充数据
+``` java
+    public void setData(Collection<?> initData);
+
+    public void addData(Collection<?> newData);
+
+
+    public void addHeader(Object header);
+
+    public void addHeader(int position, Object header);
+
+
+    public void addData(Object newData);
+
+    public void addData(int position, Object newData);
+
+    public void addFooter(Object footer);
+
+    public void addFooter(int position, Object footer);
+
+    public void removeHeader(int position);
+
+    public void removeData(int position);
+
+    public void removeFooter(int position);
+
+    public void removeHeader(Object header);
+
+    public void removeData(Object removingData);
+
+    public void removeFooter(Object footer);
+
+    public void clearHeaders();
+
+    public void clearData();
+
+    public void clearFooters();
+```
 
 
 
