@@ -80,7 +80,22 @@ adapter.register(YourFooterModel.class, new YourFooterModelViewProvider());
 
     public void setOnDataClickListener(OnDataClickListener onDataClickListener);//为内容添加点击事件
 ```
+## 4. LoadMoreFooter
+如果你要使用加载更多功能，只需要注册就行：
+``` java
+adapter.register(LoadMoreFooterModel.class, new LoadMoreFooterViewHolderProvider());
 
+LoadMoreFooterModel loadMoreFooterModel;
+
+adapter.addFooter(loadMoreFooterModel);
+```
+然后：
+
+``` java
+public void noMoreData();//没有更多数据的时候调用
+public void errorOccur(); //出错的时候调用
+public void canLoadMore(); //有更多数据（一般为刷新的时候）的时候调用
+```
 
 License
 -------
