@@ -1,4 +1,5 @@
 # LightAdapter
+一个为`RecyclerView`打造的轻量级，可配置化，快速的Adapter
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 
 
