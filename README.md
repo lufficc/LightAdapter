@@ -25,16 +25,24 @@ LightAdapter的核心其实是多类型视图，是看了[drakeet/MultiType](htt
 
 ## 截图
 *多类型视图*
+
 ![sample](screenshots/device-2016-08-31-223121.gif)
 
 *Header and footer*
+
+
 ![sample](screenshots/device-2016-08-31-223340.gif)
 
+
 *loadMore footer*
+
 ![sample](screenshots/device-2016-08-31-223605.gif)
 
+
 *usage of GridLayoutManager*
+
 ![sample](screenshots/device-2016-08-31-223812.gif)
+
 
 ## 使用(详细的使用看Demo，基本包含所有使用场景,[Demo下载体验](apk/app.apk))
 ## 1. 依赖
