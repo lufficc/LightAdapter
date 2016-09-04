@@ -217,6 +217,13 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         notifyItemInserted(headers.size() - 1);
     }
 
+    public void updateHeader(int position, Object header) {
+        if (isHeader(position)) {
+            headers.set(position, header);
+            notifyItemChanged(position);
+        }
+    }
+
     public void addHeader(int position, Object header) {
         headers.add(position, header);
         notifyItemInserted(position);
@@ -240,6 +247,13 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void addFooter(Object footer) {
         footers.add(footer);
         notifyItemInserted(headers.size() + data.size() + footers.size() - 1);
+    }
+
+    public void updateFooter(int position, Object footer) {
+        if (isFooter(position)) {
+            footers.set(position, footer);
+            notifyItemChanged(data.size() + headers.size() + position);
+        }
     }
 
     public void addFooter(int position, Object footer) {
