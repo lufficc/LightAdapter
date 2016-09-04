@@ -7,6 +7,7 @@ import com.lufficc.demolightadapter.model.TextModel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * Created by lufficc on 2016/8/31.
@@ -36,10 +37,22 @@ public class DataSource {
         }
         return list;
     }
+
     static List<Object> textModel() {
         List<Object> list = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             list.add(new TextModel("Stay hungry,stay foolish  " + i));
+        }
+        return list;
+    }
+
+    static List<Object> randomTextModel() {
+        List<Object> list = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            if (random.nextBoolean())
+                list.add(new TextModel("Stay hungry,stay foolish  " + i));
+            else
+                list.add(new TextModel("Stay hungry,stay foolish  " + UUID.randomUUID().toString()));
         }
         return list;
     }

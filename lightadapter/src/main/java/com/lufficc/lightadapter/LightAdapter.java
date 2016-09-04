@@ -155,8 +155,9 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
 
     public GridLayoutManager.SpanSizeLookup spanSizeLookup(int headerSpan, int footerSpan) {
-        return new AdapterSpanSizeLookup(headerSpan,footerSpan);
+        return new AdapterSpanSizeLookup(headerSpan, footerSpan);
     }
+
     private class AdapterSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
         int headerSpan;
         int footerSpan;
@@ -197,10 +198,14 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void setData(Collection<?> initData) {
         data.clear();
         data.addAll(initData);
-        notifyItemRangeInserted(headers.size(), data.size());
+        notifyDataSetChanged();
     }
 
     public void addData(Collection<?> newData) {
+        if (data.isEmpty()) {
+            setData(newData);
+            return;
+        }
         int size = data.size();
         data.addAll(newData);
         notifyItemRangeInserted(size + headers.size(), newData.size());
@@ -221,6 +226,10 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void addData(Object newData) {
         data.add(newData);
         notifyItemInserted(headers.size() + data.size() - 1);
+    }
+
+    public boolean isDataEmpty() {
+        return data.isEmpty();
     }
 
     public void addData(int position, Object newData) {
@@ -299,6 +308,7 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             notifyDataSetChanged();
         }
     }
+
 
     public void clearFooters() {
         int size = footers.size();

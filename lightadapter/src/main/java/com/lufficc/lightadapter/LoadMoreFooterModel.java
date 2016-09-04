@@ -92,14 +92,22 @@ public class LoadMoreFooterModel {
             footerViewHolder.noMoreData(noMoreMsg, noMoreIcon);
         }
     }
-
+    public void noMoreData(String noMoreMsg) {
+        if (footerViewHolder != null) {
+            footerViewHolder.noMoreData(noMoreMsg, noMoreIcon);
+        }
+    }
 
     public void errorOccur() {
         if (footerViewHolder != null) {
             footerViewHolder.errorOccur(errorMsg, errorIcon);
         }
     }
-
+    public void errorOccur(String errorMsg) {
+        if (footerViewHolder != null) {
+            footerViewHolder.errorOccur(errorMsg, errorIcon);
+        }
+    }
     public boolean isFullSpan() {
         return fullSpan;
     }
@@ -116,7 +124,11 @@ public class LoadMoreFooterModel {
             footerViewHolder.canLoadMore(loadingMsg);
         }
     }
-
+    public void canLoadMore(String loadingMsg) {
+        if (footerViewHolder != null) {
+            footerViewHolder.canLoadMore(loadingMsg);
+        }
+    }
     /**
      * set visibility gone
      */

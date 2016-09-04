@@ -32,7 +32,10 @@
             android:name=".GridLoadMoreActivity"
             android:label="GridLoadMoreActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
+        <activity
+            android:name=".SLoadMoreActivity"
+            android:label="SLoadMoreActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
     </application>
 

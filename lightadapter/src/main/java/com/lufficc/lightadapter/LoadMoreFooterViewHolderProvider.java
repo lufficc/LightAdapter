@@ -90,12 +90,10 @@ public class LoadMoreFooterViewHolderProvider extends ViewHolderProvider<LoadMor
         }
 
         private void initItemViewState(LoadMoreFooterModel footerModel) {
-            if (footerModel.isFullSpan()) {
-                StaggeredGridLayoutManager.LayoutParams layoutParams = new StaggeredGridLayoutManager.
-                        LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                layoutParams.setFullSpan(true);
-                itemView.setLayoutParams(layoutParams);
-            }
+            StaggeredGridLayoutManager.LayoutParams layoutParams = new StaggeredGridLayoutManager.
+                    LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            layoutParams.setFullSpan(footerModel.isFullSpan());
+            itemView.setLayoutParams(layoutParams);
         }
 
         private void bindListener(final LoadMoreFooterModel footerModel) {
