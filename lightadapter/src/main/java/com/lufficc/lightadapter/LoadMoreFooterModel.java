@@ -11,6 +11,8 @@ public class LoadMoreFooterModel {
     private String loadingMsg = "Loading";
     private String errorMsg = "Oops,error occurred";
     private boolean fullSpan = false;
+    private int initState = FooterState.STATE_INVALID;
+
     @DrawableRes
     private int noMoreIcon = R.mipmap.ic_success;
     @DrawableRes
@@ -45,6 +47,14 @@ public class LoadMoreFooterModel {
 
     public void setNoMoreIcon(@DrawableRes int noMoreIcon) {
         this.noMoreIcon = noMoreIcon;
+    }
+
+    void setInitState(int initState) {
+        this.initState = initState;
+    }
+
+    int getInitState() {
+        return initState;
     }
 
     public void setLoadMoreListener(LoadMoreListener listener) {
@@ -90,11 +100,17 @@ public class LoadMoreFooterModel {
     public void noMoreData() {
         if (footerViewHolder != null) {
             footerViewHolder.noMoreData(noMoreMsg, noMoreIcon);
+        }else {
+            whenProviderNull(FooterState.STATE_NO_MORE);
         }
     }
+
     public void noMoreData(String noMoreMsg) {
         if (footerViewHolder != null) {
             footerViewHolder.noMoreData(noMoreMsg, noMoreIcon);
+        }
+        else {
+            whenProviderNull(FooterState.STATE_NO_MORE);
         }
     }
 
@@ -102,12 +118,20 @@ public class LoadMoreFooterModel {
         if (footerViewHolder != null) {
             footerViewHolder.errorOccur(errorMsg, errorIcon);
         }
+        else {
+            whenProviderNull(FooterState.STATE_ERROR);
+        }
     }
+
     public void errorOccur(String errorMsg) {
         if (footerViewHolder != null) {
             footerViewHolder.errorOccur(errorMsg, errorIcon);
         }
+        else {
+            whenProviderNull(FooterState.STATE_ERROR);
+        }
     }
+
     public boolean isFullSpan() {
         return fullSpan;
     }
@@ -123,12 +147,19 @@ public class LoadMoreFooterModel {
         if (footerViewHolder != null) {
             footerViewHolder.canLoadMore(loadingMsg);
         }
+        else {
+            whenProviderNull(FooterState.STATE_LOAD_MORE);
+        }
     }
+
     public void canLoadMore(String loadingMsg) {
         if (footerViewHolder != null) {
             footerViewHolder.canLoadMore(loadingMsg);
+        }else {
+            whenProviderNull(FooterState.STATE_LOAD_MORE);
         }
     }
+
     /**
      * set visibility gone
      */
@@ -136,6 +167,10 @@ public class LoadMoreFooterModel {
         if (footerViewHolder != null) {
             footerViewHolder.hideFooter();
         }
+    }
+
+    private void whenProviderNull(int state) {
+        initState = state;
     }
 
     public interface LoadMoreListener {
