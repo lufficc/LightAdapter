@@ -12,5 +12,5 @@ import android.view.ViewGroup;
 public abstract class ViewHolderProvider<Model, VH extends RecyclerView.ViewHolder> {
     public abstract VH onCreateViewHolder(@NonNull LayoutInflater layoutInflater, @NonNull ViewGroup parent);
 
-    public abstract void onBindViewHolder(Model model, VH viewHolder);
+    public abstract void onBindViewHolder(Model model, VH viewHolder,int position);
 }

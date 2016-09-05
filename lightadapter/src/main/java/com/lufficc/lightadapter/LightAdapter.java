@@ -114,7 +114,7 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         int type = getItemViewType(position);
         if (isHeader(position)) {
             final Object header = headers.get(position);
-            viewHolderProviders.get(type).onBindViewHolder(header, holder);
+            viewHolderProviders.get(type).onBindViewHolder(header, holder,position);
             if (onHeaderClickListener != null) {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -125,7 +125,7 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             }
         } else if (isFooter(position)) {
             final Object footer = footers.get(position2Footer(position));
-            viewHolderProviders.get(type).onBindViewHolder(footer, holder);
+            viewHolderProviders.get(type).onBindViewHolder(footer, holder,position2Footer(position));
             if (onFooterClickListener != null) {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -136,7 +136,7 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             }
         } else {
             final Object data = this.data.get(position2Data(position));
-            viewHolderProviders.get(type).onBindViewHolder(data, holder);
+            viewHolderProviders.get(type).onBindViewHolder(data, holder,position2Data(holder.getAdapterPosition()));
             if (onDataClickListener != null) {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

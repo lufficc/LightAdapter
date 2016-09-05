@@ -21,7 +21,7 @@ public class LoadMoreFooterViewHolderProvider extends ViewHolderProvider<LoadMor
     }
 
     @Override
-    public void onBindViewHolder(LoadMoreFooterModel footerModel, FooterViewHolder viewHolder) {
+    public void onBindViewHolder(LoadMoreFooterModel footerModel, FooterViewHolder viewHolder,int position) {
         if (footerModel.getInitState() != FooterState.STATE_INVALID) {
             viewHolder.state = footerModel.getInitState();
             footerModel.setInitState(FooterState.STATE_INVALID);
