@@ -48,20 +48,20 @@ LightAdapter的核心其实是多类型视图，是看了[drakeet/MultiType](htt
 ## 1. 依赖
 Gradle:
 ```
-compile 'com.lufficc:lightAdapter:0.0.5'
+compile 'com.lufficc:lightAdapter:0.0.7'
 ```
 Maven
 ``` xml
 <dependency>
   <groupId>com.lufficc</groupId>
   <artifactId>lightAdapter</artifactId>
-  <version>0.0.5</version>
+  <version>0.0.7</version>
   <type>pom</type>
 </dependency>
 ```
 lvy
 ``` xml
-<dependency org='com.lufficc' name='lightAdapter' rev='0.0.5'>
+<dependency org='com.lufficc' name='lightAdapter' rev='0.0.7'>
   <artifact name='$AID' ext='pom'></artifact>
 </dependency>
 ```
