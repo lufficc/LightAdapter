@@ -27,7 +27,7 @@ public class ImgViewProvider extends ViewHolderProvider<ImgModel, ImgViewProvide
     }
 
     @Override
-    public void onBindViewHolder(ImgModel imgModel, ImgViewHolder viewHolder) {
+    public void onBindViewHolder(ImgModel imgModel, ImgViewHolder viewHolder,int position) {
         viewHolder.imageView.setImageResource(imgModel.getImgId());
     }
 

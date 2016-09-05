@@ -24,7 +24,7 @@ public class TextViewProvider extends ViewHolderProvider<TextModel, TextViewProv
     }
 
     @Override
-    public void onBindViewHolder(TextModel textModel, TextViewHolder viewHolder) {
+    public void onBindViewHolder(TextModel textModel, TextViewHolder viewHolder,int position) {
         viewHolder.textView.setText(textModel.getText());
     }
 

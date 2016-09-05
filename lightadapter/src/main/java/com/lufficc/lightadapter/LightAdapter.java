@@ -19,11 +19,11 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private final List<Class> models = new ArrayList<>();
     private final List<ViewHolderProvider> viewHolderProviders = new ArrayList<>();
 
-    private final List<? super Object> data = new ArrayList<>();
+    private final List data = new ArrayList<>();
 
-    private List<? super Object> headers = new ArrayList<>();
+    private List headers = new ArrayList<>();
 
-    private List<? super Object> footers = new ArrayList<>();
+    private List footers = new ArrayList<>();
 
     private LayoutInflater layoutInflater;
 
@@ -182,20 +182,20 @@ public class LightAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
      * **********************************************************************************************
      */
 
-    public List<? super Object> getData() {
+    public List getData() {
         return data;
     }
 
-    public List<? super Object> getHeaders() {
+    public List getHeaders() {
         return headers;
     }
 
-    public List<? super Object> getFooters() {
+    public List getFooters() {
         return footers;
     }
 
 
-    public void setData(Collection<?> initData) {
+    public void setData(Collection initData) {
         data.clear();
         data.addAll(initData);
         notifyDataSetChanged();

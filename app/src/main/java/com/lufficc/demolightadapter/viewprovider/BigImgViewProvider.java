@@ -22,7 +22,7 @@ public class BigImgViewProvider extends ViewHolderProvider<BigImgModel, BigImgVi
     }
 
     @Override
-    public void onBindViewHolder(BigImgModel model, HeaderViewHolder viewHolder) {
+    public void onBindViewHolder(BigImgModel model, HeaderViewHolder viewHolder,int position) {
         viewHolder.textView.setText(model.getInfo());
     }
 
